@@ -6,9 +6,7 @@ package projetofisica;
 
 import controller.Controller;
 import view.Janela;
-import view.Menu;
 import view.MenuExercicio1;
-import view.MenuExercicio2;
 
 
 
@@ -24,18 +22,13 @@ public class ProjetoFisica {
     public static void main(String[] args) {
         Janela janela = new Janela();
         MenuExercicio1 menuEx1 = new MenuExercicio1();
-        MenuExercicio2 menuEx2 = new MenuExercicio2();
-        Menu menuTeste = new Menu();
-        Controller c = new Controller(janela,menuEx1,menuEx2);
-        menuTeste.setC(c);
-        c.setMenu(menuTeste);
+        Controller c = new Controller(janela,menuEx1);
         janela.setC(c);
-        menuEx1.setC(c);
-        menuEx2.setC(c);       
+        menuEx1.setC(c);      
         janela.setVisible(true);
-        menuTeste.setVisible(true);
+        //menuTeste.setVisible(true);
         menuEx1.setVisible(true);
-        menuEx2.setVisible(true);
+        //menuEx2.setVisible(true);
         
 //           public Controller(Janela janela, MenuExercicio1 menuEx1, MenuExercicio2 menuEx2) {
 //        this.janela = janela;

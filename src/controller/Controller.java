@@ -10,9 +10,7 @@ import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.Janela;
-import view.Menu;
 import view.MenuExercicio1;
-import view.MenuExercicio2;
 
 /**
  *
@@ -21,11 +19,9 @@ import view.MenuExercicio2;
 public class Controller {
     private Janela janela;
     private MenuExercicio1 menuEx1;
-    private MenuExercicio2 menuEx2;
-    private Menu menu;
     public double variavel= 0.05;
-    public double variavel2 = 6.0;
-    public int reps = 1;
+    public double variavel2 = 3.0;
+    public int reps = 3;
     public double valorMaximoEixo =2.0;
     public int altura;
     public int largura;
@@ -37,35 +33,17 @@ public class Controller {
     double e = 1.602176634 * Math.pow(10, -19); // carga do elétron
     double c = 3.0 * Math.pow(10, 8); // velocidade da luz
 
-
-    public Controller(Janela janela, MenuExercicio1 menuEx1, MenuExercicio2 menuEx2) {
+    private int N1=1,N2=1;
+    public Controller(Janela janela, MenuExercicio1 menuEx1) {
         this.janela = janela;
         this.menuEx1 = menuEx1;
-        this.menuEx2 = menuEx2;
     }
-    
-    
-    public Controller(Janela janela) {
-        this.janela = janela;
-    }
-    public Controller(Menu menu){
-        this.menu  = menu;
-    }
-    public Controller(Janela janela, Menu menu) {
-        this.janela = janela;
-        this.menu = menu;
-    }
+
     public Janela getJanela() {
         return janela;
     }
     public void setJanela(Janela janela) {
         this.janela = janela;
-    }
-    public Menu getMenu() {
-        return menu;
-    }
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
     public void animacao(){
        // g.create(WIDTH, WIDTH, WIDTH, HEIGHT);
@@ -81,7 +59,7 @@ public class Controller {
 
         while(cont<=reps){
             int x0=0;
-            int y0=(altura/2);
+            int y0=(altura/4);
             g.setColor(Color.BLACK);
             
             
@@ -101,33 +79,60 @@ public class Controller {
 //            }        
             //primeiro = -valorMaximoEixo;
             primeiro = 0;
+            g.drawLine(largura/2, 0, largura/2, altura);
+            g.drawLine(0,(altura/4), largura,(altura/4));
             g.drawLine(0,(altura/2), largura,(altura/2));
-            for(int x = 0 ;x < largura;x+=largura/(limiteVertical)){
-                double saida = primeiro*10;
-                saida = (int)saida;
-                saida = saida/10.0;
-                String str = String.valueOf(saida);
+            g.drawLine(0,(3*altura/4), largura,(3*altura/4));
+            //Numerando os eixos
+            for(int x = 0 ;x < largura/2;x+=largura/(limiteVertical)){
+                double saida = primeiro;
+                //saida = (int)saida;
+                //saida = saida/10.0;
+                String str = String.format("%.1f",saida);
                 if(str.equals("0.9")){
-                    g.drawString("1", x, altura/2);
+                    g.drawString("1", x+(largura/2), altura/4);
+                    g.drawString("1", x, altura/4);
+                    g.drawString("1", x+(largura/2), 3*altura/4);
+                    g.drawString("1", x, 3*altura/4);
                 }else{
-                    g.drawString(str, x, altura/2);
+                    g.drawString(str, x+(largura/2), altura/4);
+                    g.drawString(str, x, altura/4);
+                    g.drawString(str, x+(largura/2), 3*altura/4);
+                    g.drawString(str, x, 3*altura/4);
                 }
-                g.drawOval(x-1, altura/2-1, 2, 2);
+                //g.drawOval(x-1, altura/2-1, 2, 2);
 
                 primeiro += intervaloDosEixos;
             }
             g.setColor(Color.GREEN);
-
-            for(double x = 0 ; x < largura;x+=0.1){
-                int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x)/variavel2)));
+            //Primeiro grafico
+            double NPrimeiroGrafico = variavel2/N1;
+            for(double x = 0 ; x < largura/2;x+=0.1){
+                int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x)/NPrimeiroGrafico)));
+                //int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x)/2)));
                 //(altura/janela.variavel2)
-                g.drawLine((int)x,y1+(altura/2), (int)x0, y0+(altura/2));
+                g.drawLine((int)x,y1+(altura/4), (int)x0, y0+(altura/4));
                 y0=y1;
                 x0=(int)x;
                // g.drawLine(x,x, x-1,x-1 );
             }
+            //Segundo grafico
+            double NSegundoGrafico = variavel2/N2;
+
+            for(double x = largura/2 ; x < largura;x+=0.1){
+                int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x-largura/2)/NSegundoGrafico)));
+                //int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x-largura/2)/3)));
+                //(altura/janela.variavel2)
+                g.drawLine((int)x,y1+(altura/4), (int)x0, y0+(altura/4));
+                y0=y1;
+                x0=(int)x;
+               // g.drawLine(x,x, x-1,x-1 );
+            }
+            
+
+            
             try {
-                sleep(50);
+                sleep(60);
             } 
             catch (InterruptedException ex) {
                 Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,50 +158,17 @@ public class Controller {
     public void clear(){
         janela.g.clearRect(0, 0, largura, altura);
     }
-    public void getVariavel2FromJanela(){
-        try{    
-            String txt = menu.getTxtVariavel2().getText();
-            variavel2 = Double.parseDouble(txt);
-           // valorMaximoEixo = variavel2/2.0;
-        }
-        catch(NumberFormatException e){
-            menu.getTxtVariavel2().setText("Digita Numero");
-        }
-    }
-    public void getVariavelFromJanela(){
-        try{    
-            String txt = menu.getTxtVariavel().getText();
-            variavel = Double.parseDouble(txt);
-        }
-        catch(NumberFormatException e){
-            menu.getTxtVariavel().setText("Digita Numero");
-        }
-    }
+
+
     public void getRepsFromMenu(){
         try{
-            reps = Integer.parseInt(menu.getTxtReps().getText());
+            reps = Integer.parseInt(menuEx1.getTxtReps().getText());
         }
         catch(Exception e){
-            menu.getTxtReps().setText("Digite um inteiro");
+            menuEx1.getTxtReps().setText("Digite um inteiro");
         }
     }
-    public void getValorEixoFromMenu(){
-        try{
-            valorMaximoEixo = Double.parseDouble(menu.getTxtValorEixo().getText());
-        }
-        catch(Exception e){
-            menu.getTxtValorEixo().setText("Digite um double");
-        }
-    }
-    public void getNMenu(){
-        try{
-            n = Integer.parseInt(menu.getTxtN().getText());
-            variavel2 = 6.0/n;
-        }
-        catch(Exception e){
-            menu.getTxtValorEixo().setText("Digite um inteiro");
-        }
-    }
+
     public void calcularExercicioUm(){
         String entradaA = menuEx1.getTxtA().getText();
         String entradaB = menuEx1.getTxtB().getText();
@@ -220,18 +192,22 @@ public class Controller {
         }
         try{
             larguraCaixaDouble = Double.parseDouble(larguraCaixa)* Math.pow(10, -9);
+            System.out.println("Largura"+larguraCaixaDouble);
         }
         catch(Exception e){
             menuEx1.getTxtLarguraCaixa().setText("Deu ruim");
         }
         try{
             nQuanticoInicial = Integer.parseInt(numeroQuanticoInicial);
+            System.out.println("Numero Quantico Inicial = "+nQuanticoInicial);
         }
         catch(Exception e){
             menuEx1.getTxtNumeroQuanticoInicial().setText("Deu ruim");
         }
         try{
             nQuanticoFinal = Integer.parseInt(numeroQuanticoFinal);
+            System.out.println("Numero Quantico Final = "+nQuanticoFinal);
+
         }catch(Exception e){
             menuEx1.getTxtNumeroQuanticoFinal().setText("Deu ruim");
         }
@@ -248,7 +224,7 @@ public class Controller {
         //double E = h * h / (8 * m * L * L);
         double E = n * n * h * h / (8 * m * larguraCaixaDouble * larguraCaixaDouble);
         //double E = n * n * Math.PI * Math.PI * h * h / (2 * m * L * L);
-        String linha2 = String.format("Energia do nível quântico inicial e final %lf %lf",E,E/e);
+        String linha2 = String.format("Energia do nível quântico inicial e final %f %f",E,E/e);
 //"A energia do elétron e: " + E + " J = " + E / e + " eV";
         
 
@@ -304,8 +280,15 @@ public class Controller {
                 linha6+"\n"+
                 linha7+"\n"+
                 linha8+"\n");
-        
+        N1= nQuanticoInicial;
+        N2= nQuanticoFinal;
         n=1;
+        try {
+            sleep(50);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        animacao();
     }
     
     
