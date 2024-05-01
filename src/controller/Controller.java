@@ -215,6 +215,7 @@ public class Controller {
         
         boolean eletronIsSelected= menuEx1.getRbEletron().isSelected();
         double massa = (eletronIsSelected)? massaEletron:massaProton;
+        String tipo = ( eletronIsSelected )?  "Eletron":"Proton";
         
         
         
@@ -232,7 +233,7 @@ public class Controller {
         //double E = h * h / (8 * m * L * L);
         double E = n * n * h * h / (8 * massa * larguraCaixaDouble * larguraCaixaDouble);
         //double E = n * n * Math.PI * Math.PI * h * h / (2 * m * L * L);
-        String linha2 = String.format("A energia do elétron e: %.3e J = %.3e eV",E,E/e);
+        String linha2 = String.format("A energia do %s e: %.3e J = %.3e eV",tipo,E,E/e);
         
 
 
@@ -279,6 +280,7 @@ public class Controller {
         double f_foton = c / lambda_foton;
         String linha8 =String.format("A frequência do foton e: %.3e Hz",f_foton );
         menuEx1.getTxtResposta().setText(
+                tipo+"\n"+
                 linha1+"\n"+
                 linha2+"\n"+
                 linha3+"\n"+
