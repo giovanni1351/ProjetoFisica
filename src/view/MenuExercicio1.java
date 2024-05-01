@@ -6,6 +6,7 @@ package view;
 
 import controller.Controller;
 import java.awt.event.KeyEvent;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -113,6 +114,30 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         this.txtResposta1 = txtResposta1;
     }
 
+    public JRadioButton getRbEletron() {
+        return rbEletron;
+    }
+
+    public void setRbEletron(JRadioButton rbEletron) {
+        this.rbEletron = rbEletron;
+    }
+
+    public JRadioButton getRbProton() {
+        return rbProton;
+    }
+
+    public void setRbProton(JRadioButton rbProton) {
+        this.rbProton = rbProton;
+    }
+
+    public JTextField getTxtX() {
+        return txtX;
+    }
+
+    public void setTxtX(JTextField txtX) {
+        this.txtX = txtX;
+    }
+
 
 
     /**
@@ -124,6 +149,7 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btMassa = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtA = new javax.swing.JTextField();
@@ -140,6 +166,10 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         txtNumeroQuanticoFinal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        rbProton = new javax.swing.JRadioButton();
+        rbEletron = new javax.swing.JRadioButton();
+        btAnimar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -147,9 +177,11 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         txtA1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtK = new javax.swing.JTextField();
-        btCalcular1 = new javax.swing.JButton();
+        btCalcularEx2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtResposta1 = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        txtX = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         bt1 = new javax.swing.JButton();
         bt2 = new javax.swing.JButton();
@@ -184,7 +216,7 @@ public class MenuExercicio1 extends javax.swing.JFrame {
 
         btCalcular.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btCalcular.setText("Calcular");
-        btCalcular.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btCalcular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCalcularActionPerformed(evt);
@@ -229,6 +261,50 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("a = ");
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo do Exercicio"));
+
+        btMassa.add(rbProton);
+        rbProton.setSelected(true);
+        rbProton.setText("Proton");
+        rbProton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbProtonActionPerformed(evt);
+            }
+        });
+
+        btMassa.add(rbEletron);
+        rbEletron.setText("Eletron");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbProton)
+                    .addComponent(rbEletron))
+                .addGap(24, 24, 24))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(rbProton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbEletron)
+                .addGap(23, 23, 23))
+        );
+
+        btAnimar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btAnimar.setText("Animar");
+        btAnimar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btAnimar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnimarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -241,22 +317,27 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtNumeroQuanticoFinal))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(138, 138, 138)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel4)))
-                            .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 111, Short.MAX_VALUE))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(138, 138, 138)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btAnimar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 120, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -270,7 +351,7 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(109, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLarguraCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -282,16 +363,24 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumeroQuanticoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(98, 98, 98)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 138, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btAnimar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -323,18 +412,27 @@ public class MenuExercicio1 extends javax.swing.JFrame {
             }
         });
 
-        btCalcular1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btCalcular1.setText("Calcular");
-        btCalcular1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btCalcular1.addActionListener(new java.awt.event.ActionListener() {
+        btCalcularEx2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btCalcularEx2.setText("Calcular");
+        btCalcularEx2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btCalcularEx2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCalcular1ActionPerformed(evt);
+                btCalcularEx2ActionPerformed(evt);
             }
         });
 
         txtResposta1.setColumns(20);
         txtResposta1.setRows(5);
         jScrollPane2.setViewportView(txtResposta1);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("X:");
+
+        txtX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtXActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -355,12 +453,15 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtA1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel11))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btCalcular1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btCalcularEx2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtK, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel8)))
@@ -382,11 +483,15 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
-                .addComponent(btCalcular1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCalcularEx2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Exercicio 2", jPanel2);
@@ -509,9 +614,9 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtKActionPerformed
 
-    private void btCalcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcular1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCalcular1ActionPerformed
+    private void btCalcularEx2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularEx2ActionPerformed
+        c.calcularExercicioDois();// TODO add your handling code here:
+    }//GEN-LAST:event_btCalcularEx2ActionPerformed
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
         c.clear();
@@ -524,6 +629,18 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     private void btReps1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReps1ActionPerformed
         c.getRepsFromMenu();
     }//GEN-LAST:event_btReps1ActionPerformed
+
+    private void rbProtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbProtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbProtonActionPerformed
+
+    private void txtXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtXActionPerformed
+
+    private void btAnimarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnimarActionPerformed
+        c.animacao();        // TODO add your handling code here:
+    }//GEN-LAST:event_btAnimarActionPerformed
     public void enter(java.awt.event.KeyEvent evt){
         if(evt.getKeyCode()== evt.VK_ENTER){
             c.calcularExercicioUm();
@@ -568,11 +685,14 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt1;
     private javax.swing.JButton bt2;
+    private javax.swing.JButton btAnimar;
     private javax.swing.JButton btCalcular;
-    private javax.swing.JButton btCalcular1;
+    private javax.swing.JButton btCalcularEx2;
+    private javax.swing.ButtonGroup btMassa;
     private javax.swing.JButton btReps1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -584,9 +704,12 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbEletron;
+    private javax.swing.JRadioButton rbProton;
     private javax.swing.JTextField txtA;
     private javax.swing.JTextField txtA1;
     private javax.swing.JTextField txtB;
@@ -597,5 +720,6 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     private javax.swing.JTextField txtReps;
     private javax.swing.JTextArea txtResposta;
     private javax.swing.JTextArea txtResposta1;
+    private javax.swing.JTextField txtX;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,7 +21,7 @@ public class Controller {
     private MenuExercicio1 menuEx1;
     public double variavel= 0.05;
     public double variavel2 = 3.0;
-    public int reps = 3;
+    public int reps = 2;
     public double valorMaximoEixo =2.0;
     public int altura;
     public int largura;
@@ -29,10 +29,11 @@ public class Controller {
     public int nInicial=1;
     public int nFinal=1;
     double h = 6.62607015 * Math.pow(10, -34); // constante de Planck
-    double m = 9.10938356 * Math.pow(10, -31); // massa do elétron
+    double massaEletron = 9.10938356 * Math.pow(10, -31); // massa do elétron
     double e = 1.602176634 * Math.pow(10, -19); // carga do elétron
     double c = 3.0 * Math.pow(10, 8); // velocidade da luz
-
+    double massaProton = 1.672 * Math.pow(10, -27);
+    
     private int N1=1,N2=1;
     public Controller(Janela janela, MenuExercicio1 menuEx1) {
         this.janela = janela;
@@ -212,35 +213,41 @@ public class Controller {
             menuEx1.getTxtNumeroQuanticoFinal().setText("Deu ruim");
         }
         
+        boolean eletronIsSelected= menuEx1.getRbEletron().isSelected();
+        double massa = (eletronIsSelected)? massaEletron:massaProton;
+        
+        
+        
+        
+        
 // Cálculo da função de onda
         if(nQuanticoInicial !=0&& nQuanticoFinal == 0){
             n = nQuanticoInicial;
         }
         double k = n * Math.PI / larguraCaixaDouble;
-        String linha1 = "Função de onda quântica no SI dos dois níveis: (x) =" +
-                Math.sqrt(2 / larguraCaixaDouble) + " sin(" + k + "x)";
+        String linha1 = String.format("Função de onda quântica no SI dos dois níveis: (x) = %.3e  sin( %.3e x)",
+                Math.sqrt(2 / larguraCaixaDouble),k );
         
 // Cálculo da energia
         //double E = h * h / (8 * m * L * L);
-        double E = n * n * h * h / (8 * m * larguraCaixaDouble * larguraCaixaDouble);
+        double E = n * n * h * h / (8 * massa * larguraCaixaDouble * larguraCaixaDouble);
         //double E = n * n * Math.PI * Math.PI * h * h / (2 * m * L * L);
-        String linha2 = String.format("Energia do nível quântico inicial e final %f %f",E,E/e);
-//"A energia do elétron e: " + E + " J = " + E / e + " eV";
+        String linha2 = String.format("A energia do elétron e: %.3e J = %.3e eV",E,E/e);
         
 
 
 
 // Cálculo da velocidade
-        double v = Math.sqrt(2 * E / m);
-        String linha3 = "A velocidade da partícula e: " + v + " m/s";
+        double v = Math.sqrt(2 * E / massa);
+        String linha3 = String.format("A velocidade da partícula e: %.3e m/s", v);
      
         
 
 
 
 // Cálculo do comprimento de onda de De Broglie
-        double lambda = h / (m * v);
-        String linha4 = "O comprimento de onda de De Broglie da partícula e: " + lambda + " m";
+        double lambda = h / (massa * v);
+        String linha4 = String.format("O comprimento de onda de De Broglie da partícula e: %.3e m", lambda);
          // Cálculo da probabilidade
         //altere os nm / m das particulas se precisar (x1 e x2)
         //double x1 = 0.07 * Math.pow(10, -9); // Converte para metros
@@ -253,24 +260,24 @@ public class Controller {
         double P_n = integral_n * 2.0 / (L * L);
         //System.out.println(P_n);
         System.out.println(integral_n);
-        String linha5 = "A probabilidade de encontrar a particula entre e: " + P_n;
+        String linha5 = String.format("A probabilidade de encontrar a particula entre e: %.3e", P_n);
         
         
         int n_inicial = (int)nQuanticoInicial;
         int n_final = (int)nQuanticoFinal;
-        double E_inicial = n_inicial * n_inicial * h * h / (8 * m *
+        double E_inicial = n_inicial * n_inicial * h * h / (8 * massa *
                 larguraCaixaDouble * larguraCaixaDouble); // Energia do estado inicial
-        double E_final = n_final * n_final * h * h / (8 * m *
+        double E_final = n_final * n_final * h * h / (8 * massa *
                 larguraCaixaDouble * larguraCaixaDouble); // Energia do estado final
         double E_foton = E_final - E_inicial; // Energia do fóton absorvido
-        String linha6 = "A energia do foton absorvido e: " + E_foton + 
-                " J = " + E_foton / e + " eV";
+        String linha6 = String.format("A energia do foton absorvido e: %.3e J = %.3e eV", + E_foton,E_foton / e );
          // Cálculo do comprimento de onda do fóton
         double lambda_foton = h * c / E_foton;
-        String linha7 = "O comprimento de onda do foton e: " + lambda_foton + " m";
+        //String linha7 = "O comprimento de onda do foton e: " + lambda_foton + " m";
+        String linha7 = String.format("O comprimento de onda do foton e: %.3e m ",lambda_foton);
         // Cálculo da frequência do fóton
         double f_foton = c / lambda_foton;
-        String linha8 ="A frequência do foton e: " + f_foton + " Hz";
+        String linha8 =String.format("A frequência do foton e: %.3e Hz",f_foton );
         menuEx1.getTxtResposta().setText(
                 linha1+"\n"+
                 linha2+"\n"+
@@ -284,13 +291,44 @@ public class Controller {
         N2= nQuanticoFinal;
         n=1;
         try {
-            sleep(50);
+            sleep(500);
         } catch (InterruptedException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        animacao();
+        //animacao();
     }
     
-    
+    public void calcularExercicioDois(){
+        
+        double A=0,K=0,x=0;
+        
+        try{
+            A = Double.parseDouble(menuEx1.getTxtA1().getText());
+        }catch(Exception e){
+            menuEx1.getTxtA1().setText("Deu ruim");
+        }
+        try{
+            K = Double.parseDouble(menuEx1.getTxtK().getText());
+        }catch(Exception e){
+            menuEx1.getTxtK().setText("Deu ruim");
+        }
+        try{
+            x =  Double.parseDouble(menuEx1.getTxtX().getText());
+        }
+        catch(Exception e){
+            menuEx1.getTxtX().setText("Deu ruim");
+        }
+        double largura = 2 / (Math.pow(A , 2));
+        String linha1 = String.format("A largura do poco eh %.3e\n" , largura);
+        
+        double nivel = (K * largura) / Math.PI;
+        String linha2 = String.format("O nivel do estado do eletron eh %.3e\n" , nivel);
+        
+        double estado = Math.sqrt(2 / largura) * Math.sin( ((nivel * Math.PI) / largura) * x * largura);
+        String linha3 = String.format("A probabilidade de encontra-lo na posicao x eh %.3e\n" , Math.pow(estado , 2));
+        menuEx1.getTxtResposta1().setText(linha1+"\n"+
+                linha2+"\n"+
+                linha3+"\n");
+    }
     
 }
