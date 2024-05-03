@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.Janela;
 import view.MenuExercicio1;
+import java.math.*;
 
 /**
  *
@@ -19,10 +20,10 @@ import view.MenuExercicio1;
 public class Controller {
     private Janela janela;
     private MenuExercicio1 menuEx1;
-    public double variavel= 0.05;
+    public double variavel= 0.10;
     public double variavel2 = 3.0;
     public int reps = 2;
-    public double valorMaximoEixo =2.0;
+    public double valorMaximoEixo =4.0;
     public int altura;
     public int largura;
     public int n=1;
@@ -33,8 +34,8 @@ public class Controller {
     double e = 1.602176634 * Math.pow(10, -19); // carga do elétron
     double c = 3.0 * Math.pow(10, 8); // velocidade da luz
     double massaProton = 1.672 * Math.pow(10, -27);
-    
     private int N1=1,N2=1;
+    double L = 0;
     public Controller(Janela janela, MenuExercicio1 menuEx1) {
         this.janela = janela;
         this.menuEx1 = menuEx1;
@@ -57,10 +58,35 @@ public class Controller {
         int y = -limiteVertical;
         boolean subindo = true;
         int cont = 0;
+        g.clearRect(0, 0, largura, altura);
 
+        int x0=0;
+        int y0=(3*altura/4);
+ //Terceiro grafico
+        for(double x = 0 ; x <= largura/2 ;x+=0.1){
+            double xDoGrafico = x/(largura/2);
+            double y1 = -1* (2/L)*Math.pow(Math.sin(xDoGrafico*3*N1),2)*1e-8;
+            //int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x-largura/2)/3)));
+            //(altura/janela.variavel2)
+            g.drawLine((int)x,(int)y1+(3*altura/4), (int)x0, (int)y0+(3*altura/4));
+            y0=(int)y1;
+            x0=(int)x;
+        }
+        //Quarto grafico
+
+        for(double x = largura/2 ; x < largura ;x+=0.1){
+            double xDoGrafico = (x-largura/2)/(largura/2);
+            double y1 = -1* (2/L)*Math.pow(Math.sin(xDoGrafico*3*N2),2)*1e-8;
+            //int y1 = (int)((y/variavel)*(Math.sin(Math.toRadians(x-largura/2)/3)));
+            //(altura/janela.variavel2)
+            g.drawLine((int)x,(int)y1+(3*altura/4), (int)x0, (int)y0+(3*altura/4));
+            y0=(int)y1;
+            x0=(int)x;
+           // g.drawLine(x,x, x-1,x-1 );
+        }
         while(cont<=reps){
-            int x0=0;
-            int y0=(altura/4);
+            x0=0;
+            y0=(altura/4);
             g.setColor(Color.BLACK);
             
             
@@ -138,7 +164,7 @@ public class Controller {
             catch (InterruptedException ex) {
                 Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
             }
-            g.clearRect(0, 0, largura, altura);
+            g.clearRect(0, 0, largura, altura/2);
             if(subindo){
                 y++;
                 if(y==limiteVertical){
@@ -155,11 +181,11 @@ public class Controller {
                 }
             }
         }
+        clear();
     }
     public void clear(){
         janela.g.clearRect(0, 0, largura, altura);
     }
-
 
     public void getRepsFromMenu(){
         try{
@@ -200,6 +226,7 @@ public class Controller {
         }
         try{
             nQuanticoInicial = Integer.parseInt(numeroQuanticoInicial);
+            N1 = nQuanticoInicial;
             System.out.println("Numero Quantico Inicial = "+nQuanticoInicial);
         }
         catch(Exception e){
@@ -207,6 +234,7 @@ public class Controller {
         }
         try{
             nQuanticoFinal = Integer.parseInt(numeroQuanticoFinal);
+            N2 = nQuanticoFinal;
             System.out.println("Numero Quantico Final = "+nQuanticoFinal);
 
         }catch(Exception e){
@@ -249,21 +277,24 @@ public class Controller {
 // Cálculo do comprimento de onda de De Broglie
         double lambda = h / (massa * v);
         String linha4 = String.format("O comprimento de onda de De Broglie da partícula e: %.3e m", lambda);
-         // Cálculo da probabilidade
+      
+        
+// Cálculo da probabilidade
         //altere os nm / m das particulas se precisar (x1 e x2)
         //double x1 = 0.07 * Math.pow(10, -9); // Converte para metros
        // double x2 = 0.14 * Math.pow(10, -9); // Converte para metros
         double x1 = A*1e-9;
         double x2 = B*1e-9;
-        double L = larguraCaixaDouble;
-        double integral_n = (x2 - x1) - (Math.sin(2 * Math.PI * n * x2 / L) -
-                Math.sin(2 * Math.PI * n * x1 / L)) / (2 * Math.PI * n / L);
-        double P_n = integral_n * 2.0 / (L * L);
-        //System.out.println(P_n);
-        System.out.println(integral_n);
-        String linha5 = String.format("A probabilidade de encontrar a particula entre e: %.3e", P_n);
+        L = larguraCaixaDouble;
+        double P_n = integrate(x1,x2,10000);
+        double P_n2 = integrate2(x1,x2,10000);
+//System.out.println(P_n);
+        String linha5 = String.format("A probabilidade de encontrar a particula entre e:nivel %d %.3e nivel %d %.3e",N1, P_n,N2,P_n2);
+        //String linha5 = String.format("A probabilidade de encontrar a particula entre e: %.3e ", P_n);
         
         
+        
+        //Calculo energia do foton absorvido
         int n_inicial = (int)nQuanticoInicial;
         int n_final = (int)nQuanticoFinal;
         double E_inicial = n_inicial * n_inicial * h * h / (8 * massa *
@@ -332,5 +363,35 @@ public class Controller {
                 linha2+"\n"+
                 linha3+"\n");
     }
-    
+
+    public double integrand1(double x) {        
+        return Math.pow(Math.abs((Math.sqrt(2 / L) * Math.sin(((N1 * Math.PI)/L) * (x)))),2);
+    }
+    public double integrand2(double x) {
+        
+        return Math.pow(Math.abs(Math.sqrt(2 / L) * Math.sin((N2 * Math.PI / L) * x)), 2);
+    }
+    // Método do trapézio para realizar a integração numérica
+    public double integrate(double a, double b, int n) {
+        double h = (b - a) / n;
+        double sum = 0.5 * (integrand1(a) + integrand1(b));
+
+        for (int i = 1; i < n; i++) {
+            double x = a + i * h;
+            sum += integrand1(x);
+        }
+
+        return h * sum;
+    }
+    public double integrate2(double a, double b, int n) {
+        double h = (b - a) / n;
+        double sum = 0.5 * (integrand2(a) +integrand2(b));
+
+        for (int i = 1; i < n; i++) {
+            double x = a + i * h;
+            sum += integrand2(x);
+        }
+
+        return h * sum;
+    }
 }
