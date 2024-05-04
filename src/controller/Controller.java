@@ -78,11 +78,12 @@ public class Controller {
         int correcao[] = {6,5,4,3,2,1,0};
         for(int x = N1; x <= N2;x++){
             //enis.add(correcao[x]); 
-            animaBola(posicoesY.get(correcao[x]));
+            boolean ultimo = (x==N2)? true:false;
+            animaBolaSubir(posicoesY.get(correcao[x]),ultimo);
         }
-        for(int x = N2-1; x >= N1;x--){
+        for(int x = N2; x > N1;x--){
            // enisReverso.add(correcao[x]);       
-            animaBola(posicoesY.get(correcao[x]));
+            animaBolaDescer(posicoesY.get(correcao[x]),posicoesY.get(correcao[x-1]));
         }
 
     }
@@ -146,7 +147,7 @@ public class Controller {
         
         
     }
-    public void animaBola(int yAtual){
+    public void animaBolaSubir(int yAtual,boolean ultimo){
         
         //Da esquerda para a direita
         for(int x = posicoesX.getFirst();x<posicoesX.getLast();x+=10){
@@ -170,6 +171,40 @@ public class Controller {
             desenhaDisplay();
             g.setColor(Color.green);
             g.fillOval(x, yAtual-12, 25, 25);
+            g.setColor(Color.red); 
+            if(!ultimo){
+                g.fillOval(xFoton, yFoton, 25, 25);
+                xFoton+=(int)dif;
+            }
+            esperar(40);
+            g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
+            
+        }
+    }
+    public void animaBolaDescer(int yAtual,int yProx){
+        
+        //Da esquerda para a direita
+        for(int x = posicoesX.getFirst();x<posicoesX.getLast();x+=10){
+            desenhaDisplay();
+            g.setColor(Color.green);
+            g.fillOval(x, yAtual-12, 25, 25);
+            esperar(40);
+            g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
+        }
+        
+        //Posição inicial do foton
+        //Ele só vai aparecer quando eletron ou proton estiver indo para a esquerda
+
+        int xFoton = posicoesX.getLast(); 
+        int yFoton = yAtual-12;
+        double dif = (double)larguraTela - posicoesX.getLast();
+        dif /= ((posicoesX.getLast()-posicoesX.getFirst())/10);
+        
+        //Animando o proton da direita para a esquerda e o foton da esquerda para a direita
+        for(int x = posicoesX.getLast();x>posicoesX.getFirst();x-=10){
+            desenhaDisplay();
+            g.setColor(Color.green);
+            g.fillOval(x, yProx-12, 25, 25);
             g.setColor(Color.red);            
             g.fillOval(xFoton, yFoton, 25, 25);
             xFoton+=(int)dif;
@@ -178,8 +213,6 @@ public class Controller {
             
         }
     }
-    
-    
     public void animGrafico(){
        // g.create(WIDTH, WIDTH, WIDTH, HEIGHT);
         g = janela.g;
