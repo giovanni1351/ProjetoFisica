@@ -79,15 +79,10 @@ public class Controller {
         for(int x = N1; x <= N2;x++){
             //enis.add(correcao[x]); 
             animaBola(posicoesY.get(correcao[x]));
-
-            System.out.println(x);
-
         }
         for(int x = N2-1; x >= N1;x--){
            // enisReverso.add(correcao[x]);       
             animaBola(posicoesY.get(correcao[x]));
-
-            System.out.println(x);
         }
 
     }
