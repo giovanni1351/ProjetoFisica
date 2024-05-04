@@ -147,6 +147,8 @@ public class Controller {
         
     }
     public void animaBola(int yAtual){
+        
+        //Da esquerda para a direita
         for(int x = posicoesX.getFirst();x<posicoesX.getLast();x+=10){
             desenhaDisplay();
             g.setColor(Color.green);
@@ -154,10 +156,16 @@ public class Controller {
             esperar(40);
             g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
         }
+        
+        //Posição inicial do foton
+        //Ele só vai aparecer quando eletron ou proton estiver indo para a esquerda
+
         int xFoton = 0; 
         int yFoton = yAtual-12;
         double dif = (double)posicoesX.getFirst();
         dif /= ((posicoesX.getLast()-posicoesX.getFirst())/10);
+        
+        //Animando o proton da direita para a esquerda e o foton da esquerda para a direita
         for(int x = posicoesX.getLast();x>posicoesX.getFirst();x-=10){
             desenhaDisplay();
             g.setColor(Color.green);
@@ -168,7 +176,6 @@ public class Controller {
             esperar(40);
             g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
             
-
         }
     }
     
