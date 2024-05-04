@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 import view.Janela;
 import view.MenuExercicio1;
 import java.math.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -19,7 +22,7 @@ import java.math.*;
  */
 public class Controller {
     private Janela janela;
-    private MenuExercicio1 menuEx1;
+    private final MenuExercicio1 menuEx1;
     public double variavel= 0.10;
     public double variavel2 = 3.0;
     public int reps = 2;
@@ -36,9 +39,32 @@ public class Controller {
     double massaProton = 1.672 * Math.pow(10, -27);
     private int N1=1,N2=1;
     double L = 0;
+    ArrayList<Integer> posicoesX = new ArrayList<>();
+    ArrayList<Integer> posicoesY = new ArrayList<>();
+    Graphics g;
+    double larguraTela;
+    double alturaTela;
     public Controller(Janela janela, MenuExercicio1 menuEx1) {
         this.janela = janela;
         this.menuEx1 = menuEx1;
+        
+        larguraTela = janela.getWidth();
+        alturaTela = janela.getHeight();
+        
+        //Linhas Verticais
+        posicoesX.add((int)larguraTela/4);
+        posicoesX.add((int)(3*larguraTela/4));
+        
+        //Linhas horizontais
+        posicoesY.add((int)alturaTela/8);//Limite superior 0
+        posicoesY.add((int)alturaTela/8+20);//E5 1
+        //posicoesY.add((int)(2*alturaTela/8)); 2
+        posicoesY.add((int)(3*alturaTela/8));//E4 2
+        posicoesY.add((int)(4*alturaTela/8));//E3 3
+        posicoesY.add((int)(5*alturaTela/8));//E2 4
+        posicoesY.add((int)(6*alturaTela/8-20));//E1 5
+        posicoesY.add((int)(6*alturaTela/8));//Limite inferior 6
+        
     }
 
     public Janela getJanela() {
@@ -47,9 +73,114 @@ public class Controller {
     public void setJanela(Janela janela) {
         this.janela = janela;
     }
-    public void animacao(){
+    public void simular(){
+                        //0 1 2 3 4 5 6 
+        int correcao[] = {6,5,4,3,2,1,0};
+        for(int x = N1; x <= N2;x++){
+            //enis.add(correcao[x]); 
+            animaBola(posicoesY.get(correcao[x]));
+
+            System.out.println(x);
+
+        }
+        for(int x = N2-1; x >= N1;x--){
+           // enisReverso.add(correcao[x]);       
+            animaBola(posicoesY.get(correcao[x]));
+
+            System.out.println(x);
+        }
+
+    }
+    public void desenhaDisplay(){
+        g = janela.g;
+        g.setColor(Color.BLACK);
+        
+        //Quadrado principal
+        //vertical
+        g.drawLine((int)posicoesX.get(0),(int)posicoesY.getFirst(), (int)posicoesX.get(0), (int)posicoesY.getLast());
+        g.drawLine((int)posicoesX.get(1),(int)posicoesY.getFirst(), (int)posicoesX.get(1), (int)posicoesY.getLast());
+        
+        // Horizontal com os numeros.
+        int difX = Math.abs(posicoesX.getFirst()-posicoesX.getLast());
+        difX = difX/5;
+        int cont = 1;
+        for(int variY =posicoesY.getFirst();variY <= posicoesY.getLast();variY +=(posicoesY.getLast()-posicoesY.getFirst()) ){
+            g.drawLine((int)posicoesX.get(1),(int)variY, (int)posicoesX.get(0), (int)variY);
+            g.drawString("0",posicoesX.getFirst(), variY-3);
+
+            for(int x  = posicoesX.getFirst(); x < posicoesX.getLast();x+=20){
+                if(x % difX >0 && x %difX < 20){
+                    String str = String.valueOf(cont);
+                    g.drawString(str,x, variY-3);
+                    cont++;
+                }
+                g.drawLine(x, variY-3, x, variY+3);            
+            }
+            cont = 1;
+        }
+        
+        //Vertical com os numeros e os E's
+        int difY = posicoesY.getLast()-posicoesY.getFirst();
+        difY/=4;
+        double Eev =0.1;
+        g.drawString("E1", posicoesX.getLast()+30, posicoesY.get(posicoesY.size()-2));
+        for(int y = posicoesY.getLast(); y >posicoesY.getFirst(); y-= 20 ){
+            if(y % difY > 0 && y %difY<20){
+                String str = String.format("%.1f",Eev);
+                String str2 = String.format("E%.0f",Eev*10+1);
+                g.drawString(str, posicoesX.getFirst()-30, y);
+                g.drawString(str2, posicoesX.getLast()+30, y);
+                Eev += 0.1;
+            }
+            g.drawLine(posicoesX.getFirst()+3, y, posicoesX.getFirst()-3, y);
+            g.drawLine(posicoesX.getLast()+3, y, posicoesX.getLast()-3, y);
+        }
+        
+
+        // Agora as linhas de dentro
+        
+        g.setColor(Color.blue);
+        int Px = posicoesX.getFirst();
+        int Ux = posicoesX.getLast();
+        for(int y = 1; y < posicoesY.size()-1;y++){
+            int atualY = posicoesY.get(y);
+            g.drawLine(Px, atualY, Ux, atualY);
+        }
+        
+        
+        
+        
+    }
+    public void animaBola(int yAtual){
+        for(int x = posicoesX.getFirst();x<posicoesX.getLast();x+=10){
+            desenhaDisplay();
+            g.setColor(Color.green);
+            g.fillOval(x, yAtual-12, 25, 25);
+            esperar(40);
+            g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
+        }
+        int xFoton = 0; 
+        int yFoton = yAtual-12;
+        double dif = (double)posicoesX.getFirst();
+        dif /= ((posicoesX.getLast()-posicoesX.getFirst())/10);
+        for(int x = posicoesX.getLast();x>posicoesX.getFirst();x-=10){
+            desenhaDisplay();
+            g.setColor(Color.green);
+            g.fillOval(x, yAtual-12, 25, 25);
+            g.setColor(Color.red);            
+            g.fillOval(xFoton, yFoton, 25, 25);
+            xFoton+=(int)dif;
+            esperar(40);
+            g.clearRect(0, 0, (int)larguraTela, (int)alturaTela);
+            
+
+        }
+    }
+    
+    
+    public void animGrafico(){
        // g.create(WIDTH, WIDTH, WIDTH, HEIGHT);
-        Graphics g = janela.g;
+        g = janela.g;
         Color cor = new Color(0,240,0);
         g.setColor(cor);
         altura = janela.preferredSize().height;
@@ -157,13 +288,8 @@ public class Controller {
             }
             
 
-            
-            try {
-                sleep(60);
-            } 
-            catch (InterruptedException ex) {
-                Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            esperar();
+
             g.clearRect(0, 0, largura, altura/2);
             if(subindo){
                 y++;
@@ -184,9 +310,24 @@ public class Controller {
         clear();
     }
     public void clear(){
-        janela.g.clearRect(0, 0, largura, altura);
+        g.clearRect(0, 0, largura, altura);
     }
-
+    public void esperar(){
+        try {
+            sleep(60);
+        } 
+        catch (InterruptedException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void esperar(int tempo){
+        try {
+            sleep(tempo);
+        } 
+        catch (InterruptedException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void getRepsFromMenu(){
         try{
             reps = Integer.parseInt(menuEx1.getTxtReps().getText());
