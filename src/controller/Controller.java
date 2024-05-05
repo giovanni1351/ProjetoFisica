@@ -81,7 +81,7 @@ public class Controller {
             boolean ultimo = (x==N2)? true:false;
             animaBolaSubir(posicoesY.get(correcao[x]),ultimo);
         }
-        for(int x = N2; x > N1;x--){
+        for(int x = N2; x > 1;x--){
            // enisReverso.add(correcao[x]);       
             animaBolaDescer(posicoesY.get(correcao[x]),posicoesY.get(correcao[x-1]));
         }
