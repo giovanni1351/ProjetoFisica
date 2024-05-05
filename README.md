@@ -17,5 +17,4 @@ Depois de instalar o ambiente Java e baixar o código do simulador, você pode e
 O simulador então calculará e exibirá várias informações, como a função de onda quântica, a energia dos níveis quânticos inicial e final, a energia, frequência e comprimento de onda do fóton absorvido ou emitido pela partícula na transição entre os níveis, a velocidade da partícula nos níveis quânticos inicial e final, o comprimento de onda de De Broglie da partícula nos níveis quânticos inicial e final, e a probabilidade de encontrar a partícula entre dois pontos no nível inicial e final.
 
 O simulador também exibirá gráficos das funções de onda para o nível inicial e final da partícula, bem como gráficos da função de distribuição de probabilidade para o nível inicial e final da partícula.
-
-Esperamos que você ache este simulador útil para seus estudos de física quântica! 🎓📚
+ 🎓📚
