@@ -474,7 +474,7 @@
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -694,15 +694,21 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="552" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="558" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -717,7 +723,9 @@
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="614" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="443" max="-2" attributes="0"/>
+                      <EmptySpace pref="165" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -755,6 +763,26 @@
                 <Property name="text" type="java.lang.String" value="Gabriel Albertini"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Este projeto &#xe9; um simulador de po&#xe7;o de potencial infinito, desenvolvido como um trabalho de f&#xed;sica qu&#xe2;ntica. &#xa;O objetivo &#xe9; estudar o confinamento de part&#xed;culas qu&#xe2;nticas, a quantiza&#xe7;&#xe3;o dos n&#xed;veis de energia da part&#xed;cula,&#xa;o salto qu&#xe2;ntico,a varia&#xe7;&#xe3;o de n&#xed;veis de energia atrav&#xe9;s da emiss&#xe3;o e absor&#xe7;&#xe3;o de f&#xf3;tons, a fun&#xe7;&#xe3;o de onda &#xa;qu&#xe2;ntica independente do tempo e a fun&#xe7;&#xe3;o de distribui&#xe7;&#xe3;o de probabilidade.&#xa;&#xa;&#xa;Como usar:&#xa;&#xa;O simulador pedir&#xe1; que voc&#xea; insira v&#xe1;rios valores, como o n&#xed;vel qu&#xe2;ntico inicial e final. &#xa;Certifique-se de que esses valores est&#xe3;o entre 1 e 5.&#xa;&#xa;O simulador ent&#xe3;o calcular&#xe1; e exibir&#xe1; v&#xe1;rias informa&#xe7;&#xf5;es, como a fun&#xe7;&#xe3;o de onda qu&#xe2;ntica, a energia&#xa;dos n&#xed;veis qu&#xe2;nticos inicial e final, a energia, frequ&#xea;ncia e comprimento de onda do f&#xf3;ton absorvido&#xa;ou emitido pela part&#xed;cula na transi&#xe7;&#xe3;o entre os n&#xed;veis, a velocidade da part&#xed;cula nos n&#xed;veis qu&#xe2;nticos&#xa;inicial e final, o comprimento de onda de De Broglie da part&#xed;cula nos n&#xed;veis qu&#xe2;nticos inicial e final, &#xa;e a probabilidade de encontrar a part&#xed;cula entre dois pontos no n&#xed;vel inicial e final.&#xa;O simulador tamb&#xe9;m exibir&#xe1; gr&#xe1;ficos das fun&#xe7;&#xf5;es de onda para o n&#xed;vel inicial e final da part&#xed;cula, &#xa;bem como gr&#xe1;ficos da fun&#xe7;&#xe3;o de distribui&#xe7;&#xe3;o de probabilidade para o n&#xed;vel inicial e final da part&#xed;cula.&#xa;&#xa;Esperamos que voc&#xea; ache este simulador &#xfa;til para seus estudos de f&#xed;sica qu&#xe2;ntica!"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

@@ -197,6 +197,8 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Projeto Fisica");
@@ -520,7 +522,7 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel8)))
-                        .addGap(0, 42, Short.MAX_VALUE)))
+                        .addGap(0, 51, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -620,6 +622,13 @@ public class MenuExercicio1 extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel18.setText("Gabriel Albertini");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Este projeto é um simulador de poço de potencial infinito, desenvolvido como um trabalho de física quântica. \nO objetivo é estudar o confinamento de partículas quânticas, a quantização dos níveis de energia da partícula,\no salto quântico,a variação de níveis de energia através da emissão e absorção de fótons, a função de onda \nquântica independente do tempo e a função de distribuição de probabilidade.\n\n\nComo usar:\n\nO simulador pedirá que você insira vários valores, como o nível quântico inicial e final. \nCertifique-se de que esses valores estão entre 1 e 5.\n\nO simulador então calculará e exibirá várias informações, como a função de onda quântica, a energia\ndos níveis quânticos inicial e final, a energia, frequência e comprimento de onda do fóton absorvido\nou emitido pela partícula na transição entre os níveis, a velocidade da partícula nos níveis quânticos\ninicial e final, o comprimento de onda de De Broglie da partícula nos níveis quânticos inicial e final, \ne a probabilidade de encontrar a partícula entre dois pontos no nível inicial e final.\nO simulador também exibirá gráficos das funções de onda para o nível inicial e final da partícula, \nbem como gráficos da função de distribuição de probabilidade para o nível inicial e final da partícula.\n\nEsperamos que você ache este simulador útil para seus estudos de física quântica!");
+        jTextArea1.setFocusable(false);
+        jScrollPane3.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -627,11 +636,15 @@ public class MenuExercicio1 extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18))
-                .addContainerGap(558, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18))
+                        .addGap(0, 552, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +657,9 @@ public class MenuExercicio1 extends javax.swing.JFrame {
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
-                .addContainerGap(614, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sobre", jPanel5);
@@ -820,7 +835,9 @@ public class MenuExercicio1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JRadioButton rbEletron;
     private javax.swing.JRadioButton rbProton;
     private javax.swing.JTextField txtA;

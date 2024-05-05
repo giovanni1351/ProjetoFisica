@@ -553,7 +553,6 @@ public class Controller {
         String linha1 = String.format("A largura do poco eh %.3e\n" , largura);
         
         double nivel = (K * largura) / Math.PI;
-        nivel = Math.floor(nivel); 
         String linha2 = String.format("O nivel do estado do eletron eh %.0f\n" , nivel);
 
         
