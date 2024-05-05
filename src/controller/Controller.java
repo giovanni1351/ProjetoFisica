@@ -14,6 +14,7 @@ import view.MenuExercicio1;
 import java.math.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -45,6 +46,7 @@ public class Controller {
     double larguraTela;
     double alturaTela;
     public Controller(Janela janela, MenuExercicio1 menuEx1) {
+        Locale.setDefault(Locale.US);
         this.janela = janela;
         this.menuEx1 = menuEx1;
         
