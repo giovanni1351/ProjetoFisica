@@ -480,11 +480,11 @@ public class Controller {
         double E_foton = E_final - E_inicial; // Energia do fóton absorvido
         String linha6 = String.format("A energia do foton absorvido e: %.3e J = %.3e eV", + E_foton,E_foton / e );
          // Cálculo do comprimento de onda do fóton
-        double lambda_foton = h * c / E_foton;
+        double lambda_foton = Math.abs(h * c / E_foton);
         //String linha7 = "O comprimento de onda do foton e: " + lambda_foton + " m";
         String linha7 = String.format("O comprimento de onda do foton e: %.3e m ",lambda_foton);
         // Cálculo da frequência do fóton
-        double f_foton = c / lambda_foton;
+        double f_foton = Math.abs(c / lambda_foton);
         String linha8 =String.format("A frequência do foton e: %.3e Hz",f_foton );
         menuEx1.getTxtResposta().setText(
                 tipo+"\n"+
