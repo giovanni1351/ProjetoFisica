@@ -550,14 +550,14 @@ public class Controller {
             menuEx1.getTxtX().setText("Deu ruim");
         }
         double largura = 2 / (Math.pow(A , 2));
-        String linha1 = String.format("A largura do poco eh %.3e\n" , largura);
+        String linha1 = String.format("A largura do poco eh %.3e m\n" , largura);
         
         double nivel = (K * largura) / Math.PI;
         String linha2 = String.format("O nivel do estado do eletron eh %.0f\n" , nivel);
 
         
         double estado = Math.sqrt(2 / largura) * Math.sin( ((nivel * Math.PI) / largura) * x * largura);
-        String linha3 = String.format("A probabilidade de encontra-lo na posicao x eh %.3e\n" , Math.pow(estado , 2));
+        String linha3 = String.format("A probabilidade de encontra-lo na posicao x eh %.3e .dx \n" , Math.pow(estado , 2));
         menuEx1.getTxtResposta1().setText(linha1+"\n"+
                 linha2+"\n"+
                 linha3+"\n");
