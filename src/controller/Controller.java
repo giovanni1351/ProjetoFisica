@@ -404,21 +404,26 @@ public class Controller {
         }
         try{
             nQuanticoInicial = Integer.parseInt(numeroQuanticoInicial);
+            if(nQuanticoInicial < 1 || nQuanticoInicial > 5) {
+                throw new Exception("Número quântico inicial deve estar entre 1 e 5");
+            }
             N1 = nQuanticoInicial;
-            System.out.println("Numero Quantico Inicial = "+nQuanticoInicial);
+            System.out.println("Número Quântico Inicial = "+nQuanticoInicial);
         }
         catch(Exception e){
-            menuEx1.getTxtNumeroQuanticoInicial().setText("Deu ruim");
+            menuEx1.getTxtNumeroQuanticoInicial().setText("Deu ruim: " + e.getMessage());
         }
         try{
             nQuanticoFinal = Integer.parseInt(numeroQuanticoFinal);
+            if(nQuanticoFinal < 1 || nQuanticoFinal > 5) {
+                throw new Exception("Número quântico final deve estar entre 1 e 5");
+            }
             N2 = nQuanticoFinal;
-            System.out.println("Numero Quantico Final = "+nQuanticoFinal);
-
-        }catch(Exception e){
-            menuEx1.getTxtNumeroQuanticoFinal().setText("Deu ruim");
+            System.out.println("Número Quântico Final = "+nQuanticoFinal);
         }
-        
+        catch(Exception e){
+            menuEx1.getTxtNumeroQuanticoFinal().setText("Deu ruim: " + e.getMessage());
+        }
         boolean eletronIsSelected= menuEx1.getRbEletron().isSelected();
         double massa = (eletronIsSelected)? massaEletron:massaProton;
         String tipo = ( eletronIsSelected )?  "Eletron":"Proton";
@@ -548,7 +553,9 @@ public class Controller {
         String linha1 = String.format("A largura do poco eh %.3e\n" , largura);
         
         double nivel = (K * largura) / Math.PI;
-        String linha2 = String.format("O nivel do estado do eletron eh %.3e\n" , nivel);
+        nivel = Math.floor(nivel); 
+        String linha2 = String.format("O nivel do estado do eletron eh %.0f\n" , nivel);
+
         
         double estado = Math.sqrt(2 / largura) * Math.sin( ((nivel * Math.PI) / largura) * x * largura);
         String linha3 = String.format("A probabilidade de encontra-lo na posicao x eh %.3e\n" , Math.pow(estado , 2));
