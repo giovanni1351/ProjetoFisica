@@ -429,30 +429,41 @@ public class Controller {
         if(nQuanticoInicial !=0&& nQuanticoFinal == 0){
             n = nQuanticoInicial;
         }
-        double k = n * Math.PI / larguraCaixaDouble;
-        String linha1 = String.format("Função de onda quântica no SI dos dois níveis: (x) = %.3e  sin( %.3e x)",
-                Math.sqrt(2 / larguraCaixaDouble),k );
+        double k1 = nQuanticoInicial * Math.PI / larguraCaixaDouble;
+        double k2 = nQuanticoFinal * Math.PI / larguraCaixaDouble;
+        String linha1 = String.format("Função de onda quântica no SI do n = %d: (x) = %.3e  sin( %.3e x)",nQuanticoInicial,
+                Math.sqrt(2 / larguraCaixaDouble),k1 );
+        String linha1_1 = String.format("Função de onda quântica no SI do n = %d: (x) = %.3e  sin( %.3e x)",nQuanticoFinal,
+                Math.sqrt(2 / larguraCaixaDouble),k2 );
+        
         
 // Cálculo da energia
         //double E = h * h / (8 * m * L * L);
-        double E = n * n * h * h / (8 * massa * larguraCaixaDouble * larguraCaixaDouble);
+        double E1 = N1 * N1 * h * h / (8 * massa * larguraCaixaDouble * larguraCaixaDouble);
+        double E2 = N2 * N2 * h * h / (8 * massa * larguraCaixaDouble * larguraCaixaDouble);
         //double E = n * n * Math.PI * Math.PI * h * h / (2 * m * L * L);
-        String linha2 = String.format("A energia do %s e: %.3e J = %.3e eV",tipo,E,E/e);
+        String linha2 = String.format("A energia do %s no n = %d e: %.3e J = %.3e eV",tipo,N1,E1,E1/e);
+        String linha2_2 = String.format("A energia do %s no n = %d e: %.3e J = %.3e eV",tipo,N2,E2,E2/e);
+
         
 
 
 
 // Cálculo da velocidade
-        double v = Math.sqrt(2 * E / massa);
-        String linha3 = String.format("A velocidade da partícula e: %.3e m/s", v);
+        double v1 = Math.sqrt(2 * E1 / massa);
+        double v2= Math.sqrt(2 * E2 / massa);
+        String linha3 = String.format("A velocidade da partícula  n = %d e: %.3e m/s",N1, v1);
+        String linha3_3 = String.format("A velocidade da partícula  n = %d e: %.3e m/s",N2, v2);
      
         
 
 
 
 // Cálculo do comprimento de onda de De Broglie
-        double lambda = h / (massa * v);
-        String linha4 = String.format("O comprimento de onda de De Broglie da partícula e: %.3e m", lambda);
+        double lambda1 = h / (massa * v1);
+        double lambda2= h / (massa * v2);
+        String linha4 = String.format("O comprimento de onda de De Broglie da partícula n = %d e: %.3e m",N1, lambda1);
+        String linha4_4 = String.format("O comprimento de onda de De Broglie da partícula n = %d e: %.3e m",N2, lambda2);
       
         
 // Cálculo da probabilidade
@@ -489,9 +500,13 @@ public class Controller {
         menuEx1.getTxtResposta().setText(
                 tipo+"\n"+
                 linha1+"\n"+
+                linha1_1+"\n"+
                 linha2+"\n"+
+                linha2_2+"\n"+
                 linha3+"\n"+
+                linha3_3+"\n"+
                 linha4+"\n"+
+                linha4_4+"\n"+
                 linha5+"\n"+
                 linha6+"\n"+
                 linha7+"\n"+
