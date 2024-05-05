@@ -146,7 +146,15 @@ public class Controller {
         }
         
         
+        //Titulo eixo X
+        int meioX = (int)larguraTela/2;
+        g.drawString("X (nm)",meioX, posicoesY.getLast()+30);
         
+
+        //Titulo eixo Y
+        int meioY = (int)alturaTela/2;
+        g.drawString("E(eV)",posicoesX.getFirst()-90, meioY);
+
         
     }
     public void animaBolaSubir(int yAtual,boolean ultimo){
@@ -260,19 +268,6 @@ public class Controller {
             
             double primeiro = valorMaximoEixo;
             double intervaloDosEixos = valorMaximoEixo/(double)limiteVertical;
-//            g.drawLine(largura/2,0, largura/2,altura);
-//            for(int x = 0 ;x < altura;x+=altura/(limiteVertical*2)){
-//                double saida = primeiro*10;
-//                saida = (int)saida;
-//                saida = saida/10.0;
-//                String str = String.valueOf(saida);
-//
-//                g.drawString(str, (largura/2)+5, x);
-//                g.drawOval((largura/2)-1, x-1, 2, 2);
-//
-//                primeiro -= intervaloDosEixos;
-//            }        
-            //primeiro = -valorMaximoEixo;
             primeiro = 0;
             g.drawLine(largura/2, 0, largura/2, altura);
             g.drawLine(0,(altura/4), largura,(altura/4));
@@ -299,6 +294,32 @@ public class Controller {
 
                 primeiro += intervaloDosEixos;
             }
+            //Nomeando o eixo x
+            
+            g.drawString("X(A)",largura/4, altura/4+30);
+            g.drawString("X(A)",3*largura/4, altura/4+30);
+            g.drawString("X(A)",largura/4, 3*altura/4+30);
+            g.drawString("X(A)",3*largura/4,3* altura/4+30);
+            
+            //Nomeando o eixo y
+            
+            g.drawString("ψ1",30,altura/8);
+            g.drawString("ψ2",largura/2+30,altura/8);
+            
+            
+            g.drawString("|ψ2|²",largura/2+30,5* altura/8);
+            g.drawString("|ψ1|²",30,5* altura/8);
+            
+            
+            //Nomeando o N
+            String nPrimeiro = String.format("N = %d", N1);
+            String nSegundo = String.format("N = %d", N2);
+            g.drawString(nSegundo,11*largura/12, altura/8);
+            g.drawString(nPrimeiro,5*largura/12, altura/8);
+            g.drawString(nSegundo,11*largura/12, 5*altura/8);
+            g.drawString(nPrimeiro,5*largura/12,5* altura/8);
+            
+            
             g.setColor(Color.GREEN);
             //Primeiro grafico
             double NPrimeiroGrafico = variavel2/N1;
